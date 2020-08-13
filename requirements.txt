@@ -1,0 +1,8 @@
+# opencv_python==3.3.0.10
+numpy==1.16.4
+pywin32==223
+imutils==0.5.3
+mss==6.0.0
+pynput==1.6.8
+termcolor==1.1.0
+win32gui==221.6

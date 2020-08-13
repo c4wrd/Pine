@@ -58,7 +58,7 @@ def start(ENABLE_AIMBOT):
 
     # Config
     YOLO_DIRECTORY = "models"
-    CONFIDENCE = 0.36
+    CONFIDENCE = 0.20 # 0.36
     THRESHOLD = 0.22
 
     #
@@ -170,7 +170,14 @@ def start(ENABLE_AIMBOT):
 
                 # classID = np.argmax(scores)
                 # confidence = scores[classID]
-                classID = 0  # person = 0
+                #classID = 0  # person = 0
+                classID = 0 # max(scores)
+                confidence = scores[classID]
+                for id in range(80):
+                    if scores[id] > confidence:
+                        classID = id
+                        confidence = scores[id]
+
                 confidence = scores[classID]
 
                 # filter out weak predictions by ensuring the detected
@@ -226,7 +233,7 @@ def start(ENABLE_AIMBOT):
                 if ENABLE_AIMBOT and bestMatch == confidences[i]:
                     mouseX = origbox[0] + (x + w/1.5)
                     mouseY = origbox[1] + (y + h/5)
-                    set_pos(mouseX, mouseY)
+                    # set_pos(mouseX, mouseY)
 
         cv2.imshow("Neural Net Vision (Pine)", frame)
         elapsed = timeit.default_timer() - start_time
